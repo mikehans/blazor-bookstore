@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<BookstoreDbContext>(options => options.UseSqlServer());
+builder.Services.AddDbContext<BookstoreDbContext>(options => options.UseSqlServer(connString));
 
 builder.Host.UseSerilog((ctx, log) =>
     log.WriteTo.Console().ReadFrom.Configuration(ctx.Configuration));
