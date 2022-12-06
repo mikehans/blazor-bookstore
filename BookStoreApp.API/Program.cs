@@ -1,3 +1,4 @@
+using BookStoreApp.API.Configurations;
 using BookStoreApp.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -12,6 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<BookstoreDbContext>(options => options.UseSqlServer(connString));
+builder.Services.AddAutoMapper(typeof(MapperConfig));
 
 builder.Host.UseSerilog((ctx, log) =>
     log.WriteTo.Console().ReadFrom.Configuration(ctx.Configuration));
