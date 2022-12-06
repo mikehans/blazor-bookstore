@@ -12,6 +12,12 @@ builder.Services.AddSwaggerGen();
 builder.Host.UseSerilog((ctx, log) =>
     log.WriteTo.Console().ReadFrom.Configuration(ctx.Configuration));
 
+builder.Services.AddCors(options =>
+{
+    // Bad, demo-warey thing to do here
+    options.AddPolicy("AllowAll", bld => bld.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin());
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -22,6 +28,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowAll");
 
 app.UseAuthorization();
 
